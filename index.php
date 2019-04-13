@@ -135,30 +135,46 @@ $tasks = [
 
                         <td class="task__date"><?=$val['data'];?></td>
                     </tr>
-                    <?php endif?>
+                    <?php elseif($show_complete_tasks==1) : ?>
+                <?php if ($val['complete']=='да') : ?>
+                    <tr class="tasks__item task--completed">
+                        <td class="task__select">
+                            <label class="checkbox task__checkbox">
+                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                <span class="checkbox__text"><?=$val['task']?>"</span>
+                            </label>
+                        </td>
+                        <td class="task__file">
+                            <a class="download-link" href="#">Home.psd</a>
+                        </td>
+                        <td class="task__date"><?=$val['data']?></td>
+
+                        <td class="task__controls">
+                        </td>
+                    </tr>
+                    <?php endif;?>
+                            <tr class="tasks__item task ">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input  class="checkbox__input visually-hidden task__checkbox"  type="checkbox" value="1">
+                                        <span class="checkbox__text"><?=$val['task'];?></span>
+                                    </label>
+                                </td>
+                                <td class="task__file">
+                                    <a class="download-link" href="#">Home.psd</a>
+                                </td>
+
+                                <td class="task__date"><?=$val['data'];?></td>
+                            </tr>
+                    <?php endif;?>
                     <?php endforeach;?>
 
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                   <?php foreach ($tasks as $key => $val) : ?>
-                    <?php if($val['complete']=='да' and $show_complete_tasks==1) : ?>
-                        <tr class="tasks__item task--completed">
-                            <td class="task__select">
-                                <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                    <span class="checkbox__text"><?=$val['task']?>"</span>
-                                </label>
-                            </td>
-                            <td class="task__file">
-                                <a class="download-link" href="#">Home.psd</a>
-                            </td>
-                            <td class="task__date"><?=$val['data']?></td>
+                <!--?php foreach ($tasks as $key => $val) : ?>
 
-                            <td class="task__controls">
-                            </td>
-                        </tr>
 
-                    <?php endif?>
-                    <?php endforeach;?>
+                    ?php endif?>
+                    ?php endforeach;?>-->
 
 
                 </table>
