@@ -121,7 +121,7 @@ $tasks = [
 
                 <table class="tasks">
                     <?php foreach ($tasks as $key => $val) : ?>
-                    <?php if($show_complete_tasks == 1 and $val['complete']=='да') : ?>
+                    <?php if($show_complete_tasks == 1  and $val['complete']=='да') : ?>
 
                             <tr class="tasks__item task--completed">
                                 <td class="task__select">
@@ -138,9 +138,8 @@ $tasks = [
                                 <td class="task__controls">
                                 </td>
                             </tr>
-
                         <?php endif;?>
-                <?php if ($val['complete']=='нет') : ?>
+
                             <tr class="tasks__item task ">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
@@ -154,7 +153,7 @@ $tasks = [
 
                                 <td class="task__date"><?=$val['data'];?></td>
                             </tr>
-                    <?php endif;?>
+
                     <?php endforeach;?>
 
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
