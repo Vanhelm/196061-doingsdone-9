@@ -153,7 +153,8 @@ $tasks = [
                         </td>
                     </tr>
                     <?php endif;?>
-                            <tr class="tasks__item task ">
+                        <?php if ($val['complete']=='нет') : ?>
+                           <tr class="tasks__item task ">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input  class="checkbox__input visually-hidden task__checkbox"  type="checkbox" value="1">
@@ -166,6 +167,7 @@ $tasks = [
 
                                 <td class="task__date"><?=$val['data'];?></td>
                             </tr>
+<?php endif;?>
                     <?php endif;?>
                     <?php endforeach;?>
 
