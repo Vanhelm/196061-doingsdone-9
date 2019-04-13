@@ -121,40 +121,27 @@ $tasks = [
 
                 <table class="tasks">
                     <?php foreach ($tasks as $key => $val) : ?>
-                    <?php if($show_complete_tasks == 0 and $val['complete']=='нет') : ?>
-                    <tr class="tasks__item task ">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input  class="checkbox__input visually-hidden task__checkbox"  type="checkbox" value="1">
-                                <span class="checkbox__text"><?=$val['task'];?></span>
-                            </label>
-                        </td>
-                         <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
+                    <?php if($show_complete_tasks == 1 and $val['complete']=='да') : ?>
 
-                        <td class="task__date"><?=$val['data'];?></td>
-                    </tr>
-                    <?php elseif($show_complete_tasks==1) : ?>
-                <?php if ($val['complete']=='да') : ?>
-                    <tr class="tasks__item task--completed">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                <span class="checkbox__text"><?=$val['task']?>"</span>
-                            </label>
-                        </td>
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
-                        <td class="task__date"><?=$val['data']?></td>
+                            <tr class="tasks__item task--completed">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                        <span class="checkbox__text"><?=$val['task']?>"</span>
+                                    </label>
+                                </td>
+                                <td class="task__file">
+                                    <a class="download-link" href="#">Home.psd</a>
+                                </td>
+                                <td class="task__date"><?=$val['data']?></td>
 
-                        <td class="task__controls">
-                        </td>
-                    </tr>
-                    <?php endif;?>
-                        <?php if ($val['complete']=='нет') : ?>
-                           <tr class="tasks__item task ">
+                                <td class="task__controls">
+                                </td>
+                            </tr>
+
+                        <?php endif;?>
+                <?php if ($val['complete']=='нет') : ?>
+                            <tr class="tasks__item task ">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input  class="checkbox__input visually-hidden task__checkbox"  type="checkbox" value="1">
@@ -167,7 +154,6 @@ $tasks = [
 
                                 <td class="task__date"><?=$val['data'];?></td>
                             </tr>
-<?php endif;?>
                     <?php endif;?>
                     <?php endforeach;?>
 
