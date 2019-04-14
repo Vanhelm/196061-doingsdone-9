@@ -41,6 +41,16 @@ $tasks = [
     ]
 
         ];
+function calculationTask (array $taskList, $taskname) {
+    foreach ($taskList as $key => $val){
+
+        $countItem = $taskList['category'];
+        return
+
+
+           }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -85,7 +95,7 @@ $tasks = [
                         <?php foreach ($project as $key => $val) : ?>
                          <li class="main-navigation__list-item">
                              <a class="main-navigation__list-item-link" href="#"><?=$val?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?php calculationTask($tasks, $val);?></span>
                         </li>
                     <?php endforeach; ?>
                     </ul>
