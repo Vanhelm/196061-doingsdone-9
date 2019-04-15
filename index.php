@@ -1,46 +1,56 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$project = ["Входящие", "Учёба", "Работа", "Домащние дела", "Авто"];
+$project = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
 $tasks = [
         [
                 'task' => 'Собеседование в IT компании',
             'data' => '01.12.2018',
-            'category' => $project[2],
+            'category' => 'Работа',
             'complete' => 'нет'
         ],
     [
             'task' => 'Выполнить тестовое задание',
             'data' => '25.12.2018',
-            'category' => $project[2],
+            'category' => 'Работа',
             'complete' => 'нет',
     ],
     [
         'task' => 'Сделать задание первого раздела',
             'data' => '21.12.2018',
-            'category' => $project[1],
+            'category' => 'Учёба',
             'complete' => 'да',
     ],
     [
         'task' => 'Встреча с другом',
             'data' => '22.12.2018',
-            'category' => $project[0],
+            'category' => 'Входящие',
             'complete' => 'нет',
     ],
     [
         'task' => 'Купить корм для кота',
             'data' => 'нет',
-            'category' => $project[3],
+            'category' => 'Домашние дела',
             'complete' => 'нет',
     ],
     [
         'task' => 'Заказать пиццу',
             'data' => 'нет',
-            'category' => $project[3],
+            'category' => 'Домашние дела',
             'complete' => 'нет',
     ]
 
         ];
+function calculationTask (array $taskList, $projectName) {
+    $countItem = 0;
+    foreach ($taskList as $key => $val){
+                if($val['category'] == $projectName){                   
+                   $countItem++;
+        }
+    }
+    return $countItem;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -85,7 +95,7 @@ $tasks = [
                         <?php foreach ($project as $key => $val) : ?>
                          <li class="main-navigation__list-item">
                              <a class="main-navigation__list-item-link" href="#"><?=$val?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?php print (calculationTask($tasks, $val));?></span>
                         </li>
                     <?php endforeach; ?>
                     </ul>
@@ -138,8 +148,8 @@ $tasks = [
                                 <td class="task__controls">
                                 </td>
                             </tr>
-                        <?php endif;?>
-<?php if($val['complete']=='нет') : ?>
+                    <?php endif;?>
+                    <?php if($val['complete']=='нет') : ?>
                             <tr class="tasks__item task ">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
@@ -153,16 +163,8 @@ $tasks = [
 
                                 <td class="task__date"><?=$val['data'];?></td>
                             </tr>
-<?php   endif;?>
+                    <?php   endif;?>
                     <?php endforeach;?>
-
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                <!--?php foreach ($tasks as $key => $val) : ?>
-
-
-                    ?php endif?>
-                    ?php endforeach;?>-->
-
 
                 </table>
             </main>
