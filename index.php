@@ -44,7 +44,7 @@ $tasks = [
 function calculationTask (array $taskList, $projectName) {
     $countItem = 0;
     foreach ($taskList as $key => $val){
-                if($val['category'] == $projectName){                   
+        if($val['category'] == $projectName){
                    $countItem++;
         }
     }
@@ -95,7 +95,7 @@ function calculationTask (array $taskList, $projectName) {
                         <?php foreach ($project as $key => $val) : ?>
                          <li class="main-navigation__list-item">
                              <a class="main-navigation__list-item-link" href="#"><?=$val?></a>
-                            <span class="main-navigation__list-item-count"><?php print (calculationTask($tasks, $val));?></span>
+                            <span class="main-navigation__list-item-count"><?=calculationTask($tasks, $val);?></span>
                         </li>
                     <?php endforeach; ?>
                     </ul>
@@ -129,44 +129,25 @@ function calculationTask (array $taskList, $projectName) {
                     </label>
                 </div>
 
-                <table class="tasks">
-                    <?php foreach ($tasks as $key => $val) : ?>
-                    <?php if($show_complete_tasks == 1  and $val['complete']=='да') : ?>
-
-                            <tr class="tasks__item task--completed">
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                        <span class="checkbox__text"><?=$val['task']?>"</span>
-                                    </label>
-                                </td>
-                                <td class="task__file">
-                                    <a class="download-link" href="#">Home.psd</a>
-                                </td>
-                                <td class="task__date"><?=$val['data']?></td>
-
-                                <td class="task__controls">
-                                </td>
-                            </tr>
-                    <?php endif;?>
-                    <?php if($val['complete']=='нет') : ?>
-                            <tr class="tasks__item task ">
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input  class="checkbox__input visually-hidden task__checkbox"  type="checkbox" value="1">
-                                        <span class="checkbox__text"><?=$val['task'];?></span>
-                                    </label>
-                                </td>
-                                <td class="task__file">
-                                    <a class="download-link" href="#">Home.psd</a>
-                                </td>
-
-                                <td class="task__date"><?=$val['data'];?></td>
-                            </tr>
-                    <?php   endif;?>
-                    <?php endforeach;?>
-
-                </table>
+        <table class="tasks">
+                    <?php foreach ($tasks as $key => $value) : ?>
+                    <?php if ($show_complete_tasks === 1 or $value["complete"] !== "да") : ?>
+        <tr class="tasks__item task <?php if($value["complete"] === "да") : ?>task--completed<?php endif;?>">
+                <td class="task__select">
+                  <label class="checkbox task__checkbox">
+                    <input class="checkbox__input visually-hidden" type="checkbox" <?php if($value["complete"] === "да") : ?> checked<?php endif;?>>
+                    <span class="checkbox__text"><?=$value["task"]; ?></span>
+                  </label>
+                </td>
+                <td class="task__file">
+                     <a class="download-link" href="#">Home.psd</a>
+                </td>
+                <td class="task__date"><?=$value["data"]; ?></td>
+                <td class="task__controls"></td>
+        </tr>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+         </table>
             </main>
         </div>
     </div>
