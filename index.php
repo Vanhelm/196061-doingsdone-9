@@ -2,10 +2,8 @@
 ini_set('error_reporting', E_ALL); 
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1);
-require_once('helpers.php');
-require_once('func/function.php');
-// показывать или нет выполненные задачи
-$currentTime = time();
+require_once('system/init.php');
+
 $show_complete_tasks = rand(0, 1);
 $projects = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
 $tasks = [
@@ -53,7 +51,7 @@ $layout_content = include_template('layout.php',[
     'projects' => $projects,
     'tasks' => $tasks,
     'content' => $content_page,
-    'title' => "Дела в порядке"
+    'title' => $title
 ]);
 
 print ($layout_content);

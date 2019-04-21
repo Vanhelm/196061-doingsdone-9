@@ -1,0 +1,37 @@
+CREATE DATABASE affairsOrder
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+USE affairsOrder;
+
+CREATE TABLE projects 
+(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name CHAR(68)
+);
+
+CREATE TABLE tasks
+(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	status TINYINT DEFAULT 0,
+	name CHAR(68) NOT NULL,
+	file TEXT,
+	term TIMESTAMP NOT NULL
+);
+
+CREATE TABLE users 
+(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	email CHAR(128) NOT NULL,
+	name CHAR(128) NOT NULL,
+	password CHAR(64) NOT NULL
+);
+
+CREATE UNIQUE INDEX email ON users(email);
+
+CREATE INDEX projectName ON projects(name);
+CREATE INDEX status ON tasks(status);
+CREATE INDEX taskName ON tasks(name);
+CREATE INDEX userName ON users(NAME); 
