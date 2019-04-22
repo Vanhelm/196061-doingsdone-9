@@ -24,7 +24,7 @@
                 <table class="tasks"> 
 <? foreach ($tasks as $key => $value) : ?> 
 <? if ($show_complete_tasks === 1 or $value["complete"] !== "да") : ?> 
-    <tr class="tasks__item task <?php if(calculationDate($value["data"], $value[complete]) === true) : ?> task--important <?php endif?><?php if($value["complete"] === "да") : ?>task--completed <?php endif;?>"> 
+    <tr class="tasks__item task <?php if(calculationDate($value["data"], $value[complete]) === true) : ?> task--important <?php endif?> <?php if($value["complete"] === "да") : ?>task--completed <?php endif;?>"> 
     <td class="task__select"> 
         <label class="checkbox task__checkbox"> 
             <input class="checkbox__input visually-hidden" type="checkbox"<?php if($value["complete"] === "да") : ?>checked<?php endif;?>> 
