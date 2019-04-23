@@ -1,7 +1,7 @@
 <?php
 
-$projects = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
-$tasks = [
+/*$projects = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];*/
+/*$tasks = [
     [
             'name' => 'Собеседование в IT компании',
             'data' => '23.04.2019',
@@ -39,7 +39,7 @@ $tasks = [
             'complete' => 'нет',
     ]
 
-        ];
+        ];*/
 
 function calculationTask (array $taskList, $projectName) 
 {
@@ -56,7 +56,7 @@ function calculationTask (array $taskList, $projectName)
 }
 
 function calculationDate($data, $taskComplete){
-	if($data === "нет" or $taskComplete === "да")
+	if($data === "нет" or $taskComplete === 1)
 	{ 
 		return false; 
 	} 

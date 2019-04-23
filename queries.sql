@@ -26,7 +26,7 @@ AS Количество
 FROM projects p 
 LEFT JOIN tasks t ON t.project_id = p.project_id 
 WHERE p.id_user=2
-GROUP BY p.project_id; ORDER BY t.project_id ASC;
+GROUP BY p.project_id ORDER BY t.project_id ASC;
 
 SELECT *  FROM tasks
 WHERE project_id = 4;
@@ -38,3 +38,4 @@ UPDATE tasks SET name='Зачем-то обновил название'
 WHERE id_task=1;
 
 
+projects
