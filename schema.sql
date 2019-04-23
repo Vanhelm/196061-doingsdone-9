@@ -1,37 +1,35 @@
-CREATE DATABASE affairsOrder
+CREATE DATABASE affairs_order
 DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 
-USE affairsOrder;
+USE affairs_order;
+
+CREATE TABLE users 
+(
+	id_user INT AUTO_INCREMENT PRIMARY KEY,
+	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	email VARCHAR(128) NOT NULL UNIQUE,
+	name VARCHAR(128) NOT NULL,
+	password VARCHAR(64) NOT NULL
+
+);
 
 CREATE TABLE projects 
 (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	name CHAR(68)
+	project_id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(68) UNIQUE,
+	id_user INT,
+	FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
 
 CREATE TABLE tasks
 (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id_task INT AUTO_INCREMENT PRIMARY KEY,
 	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	status TINYINT DEFAULT 0,
-	name CHAR(68) NOT NULL,
-	file TEXT,
-	term TIMESTAMP NOT NULL
+	name VARCHAR(68) NOT NULL,
+	file VARCHAR(100),
+	term TIMESTAMP,
+	project_id INT,
+	FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );
-
-CREATE TABLE users 
-(
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	email CHAR(128) NOT NULL,
-	name CHAR(128) NOT NULL,
-	password CHAR(64) NOT NULL
-);
-
-CREATE UNIQUE INDEX email ON users(email);
-
-CREATE INDEX projectName ON projects(name);
-CREATE INDEX status ON tasks(status);
-CREATE INDEX taskName ON tasks(name);
-CREATE INDEX userName ON users(NAME); 
