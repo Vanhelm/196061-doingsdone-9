@@ -1,7 +1,7 @@
 <?php
 
-$projects = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];
-$tasks = [
+/*$projects = ["Входящие", "Учёба", "Работа", "Домашние дела", "Авто"];*/
+/*$tasks = [
     [
             'name' => 'Собеседование в IT компании',
             'data' => '23.04.2019',
@@ -39,24 +39,26 @@ $tasks = [
             'complete' => 'нет',
     ]
 
-        ];
+        ];*/
 
-function calculationTask (array $taskList, $projectName) 
+/*function calculationTask (array $taskList, $projectName) 
 {
     $countItem = 0;
 
     foreach ($taskList as $key => $val)
     {
-        if($val['category'] == $projectName)
+        if($val['name'] == $projectName)
         {                   
            $countItem++;
         }
     }
     return $countItem;
-}
+}*/
+
+
 
 function calculationDate($data, $taskComplete){
-	if($data === "нет" or $taskComplete === "да")
+	if($data === NULL or $taskComplete === "1")
 	{ 
 		return false; 
 	} 

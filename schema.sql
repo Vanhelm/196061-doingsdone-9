@@ -33,3 +33,4 @@ CREATE TABLE tasks
 	project_id INT,
 	FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );
+mysqlmysql
