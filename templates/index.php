@@ -23,11 +23,11 @@
 
                 <table class="tasks"> 
 <? foreach ($tasks as $key => $value) : ?> 
-<? if ($show_complete_tasks === 1 or $value["status"] !== 1) : ?> 
-    <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === 1) : ?>task--completed <?php endif;?>"> 
+<? if ($show_complete_tasks === 1 or $value["status"] !== "1") : ?> 
+    <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === "1") : ?>task--completed <?php endif;?>"> 
     <td class="task__select"> 
         <label class="checkbox task__checkbox"> 
-            <input class="checkbox__input visually-hidden" type="checkbox"<?php if($value["status"] === 1) : ?>checked<?php endif;?>> 
+            <input class="checkbox__input visually-hidden" type="checkbox"<?php if($value["status"] === "1") : ?>checked<?php endif;?>> 
             <span class="checkbox__text"><?=htmlspecialchars($value["name"]); ?></span> 
         </label> 
     </td> 

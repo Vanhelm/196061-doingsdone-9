@@ -1,6 +1,5 @@
 <?php
 require_once('system/init.php');
-require_once('helpers.php');
 
 $show_complete_tasks = rand(0, 1);
 $content_page = include_template('index.php', ['tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
