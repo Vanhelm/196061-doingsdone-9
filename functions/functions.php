@@ -55,20 +55,25 @@ function correct_visual_date($data)
 * @param $user_id id пользователя
 * @return array
 */
-function get_task($link, $project_id, $user_id)
+function get_task($link, $project_id, $user_id, $show_complete_task)
 {
 	$where_task = "";
+	$where_status_task = "";
 	
+	if($show_complete_task == 0)
+	{
+		$where_task = "status=0 AND ";
+	}
+
 	if($project_id>0)
 	{
 		$where_task = "project_id = " .$project_id. " AND";
 	}
 
-	$get_tasks_user = "SELECT name, status, term FROM tasks WHERE " .$where_task. " id_user= " . $user_id;
-	$res_task = mysqli_query($link, $get_tasks_user);
+	$sql_tasks_user = "SELECT name, status, term FROM tasks WHERE " . $where_status_task . $where_task . " id_user= " . $user_id;
+	$res_task = mysqli_query($link, $sql_tasks_user);
 	$tasks = mysqli_fetch_all($res_task, MYSQLI_ASSOC);
 	return $tasks;
 }
-
 
 
