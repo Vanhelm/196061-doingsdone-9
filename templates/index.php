@@ -34,7 +34,7 @@
     <td class="task__file">
         <a class="download-link" href="#">Home.psd</a>
     </td>
-    <td class="task__date"><?=$value["term"]; ?></td> 
+    <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 
     </tr> 
 <? endif; ?> 

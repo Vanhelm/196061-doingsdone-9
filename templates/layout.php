@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/flatpickr.min.css">
 </head>
 
 <body>
@@ -16,11 +16,11 @@
     <div class="container container--with-sidebar">
         <header class="main-header">
             <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                <img src="/img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="/pages/form-task.html">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
@@ -39,8 +39,8 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $key => $val) : ?>
-                         <li class="main-navigation__list-item">
-                             <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($val['project_name']);?></a>
+                         <li class="main-navigation__list-item <?php if($active == $val['project_id']) : ?> main-navigation__list-item--active<?php endif ?>">
+                             <a class="main-navigation__list-item-link" href="/index.php/?<?=http_build_query(['id' => $val['project_id']])?>"><?=htmlspecialchars($val['project_name']);?></a>
                             <span class="main-navigation__list-item-count"><?=$val['count_item'];?></span>
                         </li>
                         <?php endforeach; ?>
@@ -109,7 +109,7 @@
             <span class="visually-hidden">Разработано:</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
-                <img src="img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
+                <img src="/img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
             </a>
         </div>
     </div>
