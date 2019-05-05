@@ -57,23 +57,50 @@ function correct_visual_date($data)
 */
 function get_task($link, $project_id, $user_id, $show_complete_task)
 {
-	$where_task = "";
-	$where_status_task = "";
+	$sql_tasks_user = "SELECT name, status, term FROM tasks WHERE id_user= " . $user_id;
 	
 	if($show_complete_task == 0)
 	{
-		$where_task = "status=0 AND ";
+		$sql_tasks_user .= " AND status=0";
 	}
 
 	if($project_id>0)
 	{
-		$where_task = "project_id = " .$project_id. " AND";
+		$sql_tasks_user .= " AND project_id = " .$project_id;
 	}
 
-	$sql_tasks_user = "SELECT name, status, term FROM tasks WHERE " . $where_status_task . $where_task . " id_user= " . $user_id;
 	$res_task = mysqli_query($link, $sql_tasks_user);
 	$tasks = mysqli_fetch_all($res_task, MYSQLI_ASSOC);
 	return $tasks;
 }
 
 
+function visual_error(array $error)
+{
+	if(!empty($error))
+	{
+		foreach ($error as $key => $value) 
+		{
+			if($value == "name")
+			{
+				print "Это поле должно быть заполненным";
+			}
+			if($value == "date")
+			{
+				print "Дата должна быть больше, либо равна текущей";
+			}
+			if($value == "date current")
+			{
+				echo "Дата не введена или неверный формат(ГГГГ.ММ.ДД.)";
+			}
+			if($value == "ошибка в id")
+			{
+				echo "Вот это вообще некрасиво";
+			}
+		}
+	}
+	else
+	{
+		echo "Красавчик";
+	}
+}

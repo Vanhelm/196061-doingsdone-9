@@ -21,7 +21,7 @@
                     </label>
                 </div>
 
-                <table class="tasks"> 
+<table class="tasks"> 
 <? foreach ($tasks as $key => $value) : ?> 
 <? if ($show_complete_tasks === 1 or $value["status"] !== "1") : ?> 
     <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === "1") : ?>task--completed <?php endif;?>"> 
@@ -39,4 +39,4 @@
     </tr> 
 <? endif; ?> 
 <? endforeach; ?> 
-                </table>
+</table>

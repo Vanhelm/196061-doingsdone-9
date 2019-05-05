@@ -3,13 +3,12 @@ require_once('system/init.php');
 
 $show_complete_tasks = rand(0, 1);	
 $content_page;
+$tasks = [];
 
 if(isset($_GET['id']))
 {
 	$active_project_id = intval($_GET['id']);
 }
-$tasks = get_task($link, $active_project_id, $user_id, $show_complete_tasks);
-
 
 $sql_project_id = "SELECT project_id FROM projects WHERE project_id= " . $active_project_id. " AND id_user= " . $user_id;
 $res = mysqli_query($link, $sql_project_id);
@@ -22,6 +21,7 @@ if(empty($id_project) AND isset($_GET['id']))
 }
 else
 {
+	$tasks = get_task($link, $active_project_id, $user_id, $show_complete_tasks);
 	$content_page = include_template('index.php', ['tasks' => $tasks, 'show_complete_tasks' => $show_complete_tasks]);
 }
 
