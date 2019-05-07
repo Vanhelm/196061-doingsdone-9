@@ -9,7 +9,7 @@ require_once('helpers.php');
 
 $title = "Дела в порядке";
 $active_project_id = 0;
-$user_id = 2;
+$user_id = 3;
 
 $link = mysqli_connect("localhost", "root", "", "affairs_order");
 
