@@ -52,13 +52,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 		else
 		{
-			$data['date'] = mysqli_real_escape_string($link, $_POST['date']);
+			$data['date'] = mysqli_real_escape_string($link, "'".$_POST['date']."'");
 		}
 		
 	}
 	else
 	{
-		$data['date'] = strtotime(null);
+		$data['date'] = "null";
 	}
 	
 	if(isset($_FILES['file']) AND is_uploaded_file($_FILES['file']['tmp_name']))
@@ -82,7 +82,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	}
 	if(empty($errors))
 	{
-		$sql = "INSERT INTO tasks (name, project_id, file, id_user) VALUES ('" . $data['name']."','".$data['project']."','".$data['file_url']."', '$user_id')";
+		$sql = "INSERT INTO tasks (name, project_id, file, id_user, term) VALUES ('" . $data['name']."','".$data['project']."','".$data['file_url']."', '$user_id',".$data['date'].")";
+		print_r($sql);
 		$result = mysqli_query($link, $sql);
 		if($result)
 		{
