@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	}
 	else
 	{
-		$data['date'] = null;
+		$data['date'] = strtotime(null);
 	}
 	
 	if(isset($_FILES['file']) AND is_uploaded_file($_FILES['file']['tmp_name']))
@@ -84,11 +84,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{
 		$sql = "INSERT INTO tasks (name, project_id, file, id_user) VALUES ('" . $data['name']."','".$data['project']."','".$data['file_url']."', '$user_id')";
 		$result = mysqli_query($link, $sql);
-		if(!empty($data['date']))
-		{
-			$sql_term = "INSERT INTO tasks (term) VALUES('" .$data['date']."')";
-			$result = mysqli_query($link, $sql_term);
-		}
 		if($result)
 		{
 			header("Location: /");
