@@ -19,7 +19,7 @@
 
           <div class="form__row">
             <label class="form__label" for="date">Дата выполнения</label>
-            <input class="form__input form__input--date<?php if(!empty($errors['date'])) : ?> form__input--error <?php endif?>" type="text" name="date" id="date" value="<?=$data['date'] ?? ""?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+            <input class="form__input form__input--date<?php if(!empty($errors['date'])) : ?> form__input--error <?php endif?>" type="text" name="date" id="date" value="<?=$_POST['date'] ?? ""?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
             <?php if(!empty($errors['date'])) : ?> <p class="form__message"><?=$errors['date']?></p> <?php endif ?>
           </div>
 
