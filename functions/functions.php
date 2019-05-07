@@ -6,12 +6,12 @@
 * Функция сравнивает текущую дату и дату завершения задачи
 * и возвращает true или false
 * 
-* @param $data - дата завершения в формате TIMESTAMP
-* @param $taskComplete int - статус задачи(выполнена или нет)
+* @param string $data - дата завершения в формате TIMESTAMP
+* @param int $taskComplete  - статус задачи(выполнена или нет)
 * @return bool
 */
 function calculationDate($data, $taskComplete){
-	if($data === NULL or $taskComplete === "1")
+	if($data == NULL or $taskComplete === "1")
 	{ 
 		return false; 
 	} 
@@ -34,14 +34,14 @@ function calculationDate($data, $taskComplete){
 * Функция убирает время и оставляет только дату
 * 
 * 
-* @param $data дата которую надо привести в правильный вид
+* @param string $data дата которую надо привести в правильный вид
 * @return date
 */
 function correct_visual_date($data)
 {
 	if($data == NULL)
 	{
-		return null;
+		return NULL;
 	}
 	$date = $data;
 	$dt = new DateTime($date);
@@ -54,9 +54,9 @@ function correct_visual_date($data)
 * Функция позволяет получить массив с задачами
 * по заданным условиям
 * 
-* @param $link подключение к БД
-* @param $project_id id проекта
-* @param $user_id id пользователя
+* @param string $link подключение к БД
+* @param int $project_id id проекта
+* @param int $user_id id пользователя
 * @return array
 */
 function get_task($link, $project_id, $user_id, $show_complete_task)

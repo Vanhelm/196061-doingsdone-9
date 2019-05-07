@@ -32,7 +32,7 @@
         </label> 
     </td> 
     <td class="task__file">
-        <a class="download-link" href="#">Home.psd</a>
+        <a class="download-link" href="<?=$value['file']?>">Home.psd</a>
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 

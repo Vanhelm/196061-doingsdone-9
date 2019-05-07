@@ -4,8 +4,7 @@ require_once 'system/init.php';
 $keys = ['name', 'project'];
 $currentDate = time() - 86400;
 $errors = [];
-$data = ['name' => "", 'date' => null, 'project' => "", 'file_url' => "", 'user_id' => ""];
-$data ['user_id'] = $user_id;
+$data = [];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -57,30 +56,49 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 		
 	}
+	else
+	{
+		$data['date'] = null;
+	}
 	
 	if(isset($_FILES['file']) AND is_uploaded_file($_FILES['file']['tmp_name']))
 	{	
 		if(!empty($errors))
 		{
-			$errors['file'] = "Файл доступен для загрузки после заполнения всех полей";
+			$errors['file'] = "Файл отправляетя после заполнения всех обязательных полей";
 		}
-		$file_name = $_FILES['file']['name'];
-		$uniq_name = uniqid($file_name);
-		$file_path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
-		$data['file_url'] = "/uploads/" . $uniq_name;
-		move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $uniq_name);
+		else
+		{
+			$file_name = $_FILES['file']['name'];
+			$uniq_name = uniqid($file_name);
+			$file_path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
+			$data['file_url'] = "/uploads/" . $uniq_name;
+			move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $uniq_name);
+		}
+	}
+	else
+	{
+		$data['file_url'] = "";
 	}
 	if(empty($errors))
 	{
-		$sql = "INSERT INTO tasks (name, project_id, term, file, id_user) VALUES ('" . $data['name']."','".$data['project']."','".$data['date']."','".$data['file_url']."','".$data['user_id']."')";
+		$sql = "INSERT INTO tasks (name, project_id, file, id_user) VALUES ('" . $data['name']."','".$data['project']."','".$data['file_url']."', '$user_id')";
 		$result = mysqli_query($link, $sql);
+		if(!empty($data['date']))
+		{
+			$sql_term = "INSERT INTO tasks (term) VALUES('" .$data['date']."')";
+			$result = mysqli_query($link, $sql_term);
+		}
 		if($result)
 		{
 			header("Location: /");
 		} 
+		else
+		{
+			print_r(mysqli_error($link));
+		}
 	}
 }
-print_r($data);
 $content = include_template('form-task.php', ['projects' => $projects, 'title' => "Добавить задачу", 'errors' => $errors, 'data' => $data]);
 $layout_content = include_template('layout.php',[
     'projects' => $projects,

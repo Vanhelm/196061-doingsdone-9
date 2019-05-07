@@ -3,7 +3,7 @@
         <form class="form"  action="/add.php" method="post" autocomplete="off" enctype="multipart/form-data">
           <div class="form__row">
             <label class="form__label" for="name">Название <sup>*</sup></label>
-            <input class="form__input<?php if(!empty($errors['name'])) : ?> form__input--error <?php endif?>" type="text" name="name" id="name" value="<?=$data['name']?>" placeholder="Введите название">
+            <input class="form__input<?php if(!empty($errors['name'])) : ?> form__input--error <?php endif?>" type="text" name="name" id="name" value="<?=$data['name'] ?? ""?>" placeholder="Введите название">
             <?php if(!empty($errors['name'])) : ?> <p class="form__message"><?=$errors['name']?></p> <?php endif ?>
           </div>
 
@@ -19,7 +19,7 @@
 
           <div class="form__row">
             <label class="form__label" for="date">Дата выполнения</label>
-            <input class="form__input form__input--date<?php if(!empty($errors['date'])) : ?> form__input--error <?php endif?>" type="text" name="date" id="date" value="<?=$data['date']?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+            <input class="form__input form__input--date<?php if(!empty($errors['date'])) : ?> form__input--error <?php endif?>" type="text" name="date" id="date" value="<?=$data['date'] ?? ""?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
             <?php if(!empty($errors['date'])) : ?> <p class="form__message"><?=$errors['date']?></p> <?php endif ?>
           </div>
 
