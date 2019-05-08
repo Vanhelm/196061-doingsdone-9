@@ -1,4 +1,8 @@
 <?php
+if(session_id() == '') 
+{
+    session_start();
+}
 ini_set('error_reporting', E_ALL); 
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1);
@@ -9,7 +13,14 @@ require_once('helpers.php');
 
 $title = "Дела в порядке";
 $active_project_id = 0;
-$user_id = 3;
+if(isset($_SESSION['user_id']))
+{
+	$user_id = $_SESSION['user_id'];
+}
+else
+{
+	$user_id = 0;
+}
 
 $link = mysqli_connect("localhost", "root", "", "affairs_order");
 

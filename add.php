@@ -2,7 +2,7 @@
 require_once 'system/init.php';
 
 $keys = ['name', 'project'];
-$currentDate = strtotime('"today');
+$currentDate = strtotime('today');
 $errors = [];
 $data = [];
 $id = 0;
@@ -18,13 +18,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 		else
 		{
-			$errors[$val] = "Это поле обязательно для заполнение";
+			$errors[$val] = "Это поле обязательно для заполнения";
 		}
 	}
 
 	if(empty($errors['name']) AND strlen($data['name']) > 60)
 	{
-		$errors['name'] = "Cлишком длинное имя задачи";
+		$errors['name'] = "Cлишком длинное имя задачи, максимум 60 символов";
 		$data['name'] = ""; 
 	}
 	if(empty($errors['project']))
@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{	
 		if(!empty($errors))
 		{
-			$errors['file'] = "Файл отправляетя после заполнения всех обязательных полей";
+			$errors['file'] = "Заполните форму без ошибок и загрузите файл повторно!";
 		}
 		else
 		{
