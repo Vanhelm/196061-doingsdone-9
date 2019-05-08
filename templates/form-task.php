@@ -9,12 +9,12 @@
 
           <div class="form__row">
             <label class="form__label" for="project">Проект <sup>*</sup></label>
-            <select class="form__input form__input--select<?php if(!empty($errors['project'])) : ?>form__input--error<?php endif?>" name="project" id="project">
+            <select class="form__input form__input--select<?php if(!empty($errors['project'])) : ?> form__input--error<?php endif?>" name="project" id="project">
               <?php foreach ($projects as $key => $value): ?>
-                <option value="<?=$value['project_id']?>"><?=$value['project_name']?></option>
+                <option <?php if($id == $value['project_id']) : ?> selected <?php endif?> value="<?=$value['project_id']?>"><?=$value['project_name']?></option>
               <?php endforeach ?>
             </select>
-            <?php if(!empty($errors['project'])) : ?><p class="form__message"><?=$errors['project']?></p> <?php endif ?>              
+            <?php if(!empty($errors['project'])) : ?><p class="form__messnamerrors['project']?></p> <?php endif ?>              
           </div>
 
           <div class="form__row">

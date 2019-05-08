@@ -2,9 +2,10 @@
 require_once 'system/init.php';
 
 $keys = ['name', 'project'];
-$currentDate = time() - 86400;
+$currentDate = strtotime('"today');
 $errors = [];
 $data = [];
+$id = 0;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -29,10 +30,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	if(empty($errors['project']))
 	{
 		$id = intval($_POST['project']);
-		$sql = "SELECT project_id FROM projects WHERE project_id= " . $id. " AND id_user= " . $user_id;
+		$sql = "SELECT project_id, name FROM projects WHERE project_id= " . $id. " AND id_user= " . $user_id;
 		$res = mysqli_query($link, $sql);
 		$id_project = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
 		if(empty($id_project))
 		{
 			$errors['project'] = "так нельзя делать"; 
@@ -43,16 +43,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		if(!is_date_valid($_POST['date']))
 		{
 			$errors['date'] = "Неверный формат даты";
-			$data['date'] = ""; 
 		}
 		elseif(strtotime($_POST['date']) <= $currentDate)
 		{
 			$errors['date'] = "Дата не может быть меньше текущей";
-			$data['date'] = ""; 
 		}
 		else
 		{
-			$data['date'] = mysqli_real_escape_string($link, "'".$_POST['date']."'");
+			$data['date'] = "'".$_POST['date']."'";
 		}
 		
 	}
@@ -83,7 +81,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	if(empty($errors))
 	{
 		$sql = "INSERT INTO tasks (name, project_id, file, id_user, term) VALUES ('" . $data['name']."','".$data['project']."','".$data['file_url']."', '$user_id',".$data['date'].")";
-		print_r($sql);
 		$result = mysqli_query($link, $sql);
 		if($result)
 		{
@@ -95,7 +92,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 	}
 }
-$content = include_template('form-task.php', ['projects' => $projects, 'title' => "Добавить задачу", 'errors' => $errors, 'data' => $data]);
+$content = include_template('form-task.php', ['projects' => $projects, 'title' => "Добавить задачу", 'errors' => $errors, 'data' => $data, 'id' => $id]);
 $layout_content = include_template('layout.php',[
     'projects' => $projects,
     'content' => $content,
