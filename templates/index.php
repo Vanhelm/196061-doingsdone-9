@@ -21,7 +21,7 @@
                     </label>
                 </div>
 
-                <table class="tasks"> 
+<table class="tasks"> 
 <? foreach ($tasks as $key => $value) : ?> 
 <? if ($show_complete_tasks === 1 or $value["status"] !== "1") : ?> 
     <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === "1") : ?>task--completed <?php endif;?>"> 
@@ -32,11 +32,11 @@
         </label> 
     </td> 
     <td class="task__file">
-        <a class="download-link" href="#">Home.psd</a>
+        <a class="download-link" href="<?=$value['file']?>">Home.psd</a>
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 
     </tr> 
 <? endif; ?> 
 <? endforeach; ?> 
-                </table>
+</table>
