@@ -1,6 +1,6 @@
 <?php
 require_once('system/init.php');
-if(!empty($users))
+if(!empty($user))
 {
 	$show_complete_tasks = rand(0, 1);	
 	$content_page;
@@ -32,12 +32,12 @@ if(!empty($users))
     	'content' => $content,
     	'title' => $title,
     	'active' => $active_project_id,
-    	'name_user' => $users['name']
+    	'name_user' => $user['name']
 	]);
 }
 else
 {
-	$layout_content = include_template('guest.php', ['title' => "Дела в порядке"]);
+	$layout_content = include_template('guest.php', ['title' => $title]);
 }
 
 

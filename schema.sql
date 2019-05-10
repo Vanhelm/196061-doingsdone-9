@@ -32,5 +32,6 @@ CREATE TABLE tasks
 	term VARCHAR(20),
 	project_id INT,
 	id_user INT,
+	FOREIGN KEY (id_user) REFERENCES users(id_user),
 	FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );
