@@ -3,7 +3,6 @@ require_once 'system/init.php';
 
 if(empty($user))
 {
-	http_response_code(403);
 	header("Location: /");
 	exit();
 }

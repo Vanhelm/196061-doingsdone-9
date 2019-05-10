@@ -2,7 +2,6 @@
 require_once('system/init.php');
 if(!empty($user))
 {
-	http_response_code(403);
 	header("Location: /");
 	exit();
 }
@@ -21,23 +20,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 		else
 		{
-				$errors[$val] = "Это поле обязательно для заполнения";
+			$errors[$val] = "Это поле обязательно для заполнения";
 		}
 	}
 
-$sql = "SELECT * FROM users WHERE email='".$data['email']."'";
-$res = mysqli_query($link, $sql);
-$verify = mysqli_fetch_assoc($res);
-
-	if(empty($errors['email']) AND !filter_var($data['email'], FILTER_VALIDATE_EMAIL))
+	if(empty($errors['email']))
 	{
-		$errors['email'] = "E-mail введён некорректно";
-		$sql = "SELECT * FROM users WHERE email='".$data['email']."'";
-		$res = mysqli_query($link, $sql);
-		$verify = mysqli_fetch_assoc($res);
+		if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL))
+		{
+			$errors['email'] = "E-mail введён некорректно";
+		}
+		else
+		{
+			$sql = "SELECT * FROM users WHERE email='".$data['email']."'";
+			$res = mysqli_query($link, $sql);
+			$verify = mysqli_fetch_assoc($res);
+		}
 	}
-
-	if(empty($errors['email']) AND empty($verify['email']))
+	
+	if(empty($errors['email']) AND empty($verify))
 	{	
 		$errors['email'] = "E-mail в базе не найден";
 	}
@@ -51,11 +52,7 @@ $verify = mysqli_fetch_assoc($res);
 			$errors['password'] = "Пароль не подходит к данному email";
 		}
 	}
-	else
-	{
-		//Вывод ошибки если мыла такого нет в пароле
-		$errors['password'] = "Пользователя с таким email не существует.";
-	}
+
 	if(empty($errors))
 	{
 		$_SESSION['user_id'] = intval($verify['id_user']);
