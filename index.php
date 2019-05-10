@@ -1,6 +1,6 @@
 <?php
 require_once('system/init.php');
-if(isset($_SESSION['user_id']))
+if(!empty($users))
 {
 	$show_complete_tasks = rand(0, 1);	
 	$content_page;
@@ -31,7 +31,8 @@ if(isset($_SESSION['user_id']))
     	'tasks' => $tasks,
     	'content' => $content,
     	'title' => $title,
-    	'active' => $active_project_id
+    	'active' => $active_project_id,
+    	'name_user' => $users['name']
 	]);
 }
 else

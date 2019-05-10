@@ -24,7 +24,7 @@
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p><?=$_SESSION['name']?></p>
+                        <p><?=htmlspecialchars($name_user)?></p>
 
                         <a href="/logout.php">Выйти</a>
                     </div>
