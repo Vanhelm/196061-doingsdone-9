@@ -1,9 +1,15 @@
 <?php
 require_once('system/init.php');
 
+if(!empty($user))
+{
+	header("Location: /");
+	exit();
+}
+
 $keys = ['email', 'password', 'name'];
-$data = [];
 $errors = [];
+$data=[];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -18,27 +24,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 			$errors[$val] = "Это поле обязательно для заполнения";
 		}
 	}
-	if(empty($errors['email']))
-	{
-		if(filter_var($data['email'],FILTER_VALIDATE_EMAIL) !== FALSE)
-		{
-			$sql_email = "SELECT email FROM users WHERE email ='".$data['email']."'";
-			$res = mysqli_query($link, $sql_email);
-			$email = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
-			if(!empty($email))
-			{
-				$errors['email'] = "Этот email уже зарегистрирован";
-			} 
-		}
-		else
+	if(!isset($errors['email']) AND !filter_var($data['email'],FILTER_VALIDATE_EMAIL))
+	{
+		$errors['email'] = "Электронная почта введена неверна";
+	}
+
+	if(!isset($errors['email']))
+	{
+		$sql_email = "SELECT email FROM users WHERE email ='".$data['email']."'";
+		$res = mysqli_query($link, $sql_email);
+		$email = mysqli_fetch_all($res, MYSQLI_ASSOC);
+		if($email)
 		{
-			$errors['email'] = "Электронная почта введена неверна";
+			$errors['email'] = "Пользователь с таким e-mail уже зарегистрирован";
 		}
 	}
 
 	if(empty($errors['name']) AND strlen($data['name']) > 60)
-	{
+	{	
 		$errors['name'] = "Cлишком длинное имя";
 	}
 
@@ -50,7 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		
 		if($result)
 		{
+			$_SESSION['user_id'] = intval(mysqli_insert_id($link));
 			header("Location: /");
+			exit();
 		}
 		else
 		{

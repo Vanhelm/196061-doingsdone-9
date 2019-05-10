@@ -8,7 +8,7 @@ CREATE TABLE users
 (
 	id_user INT AUTO_INCREMENT PRIMARY KEY,
 	dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	email VARCHAR(128) NOT NULL UNIQUE,
+	email VARCHAR(192) NOT NULL UNIQUE,
 	name VARCHAR(128) NOT NULL,
 	password VARCHAR(64) NOT NULL
 
@@ -32,5 +32,6 @@ CREATE TABLE tasks
 	term VARCHAR(20),
 	project_id INT,
 	id_user INT,
+	FOREIGN KEY (id_user) REFERENCES users(id_user),
 	FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );
