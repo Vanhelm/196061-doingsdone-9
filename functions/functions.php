@@ -79,3 +79,21 @@ function get_task($link, $project_id, $user_id, $show_complete_task)
 	$tasks = mysqli_fetch_all($res_task, MYSQLI_ASSOC);
 	return $tasks;
 }
+
+function convert_task_status ($id_task)
+{
+	$sql = "SELECT * FROM tasks WHERE id_task='$id_task' AND id_user='$user_id'";
+	$res = mysqli_query($link, $sql);
+	$task = mysqli_fetch_assoc($res);
+
+	if($task['status'] == 0)
+	{
+		$sql_inverts = "UPDATE tasks SET status = 1 WHERE id_user='$user_id'";
+	}
+	else
+	{
+		$sql_inverts = "UPDATE tasks SET status = 0 WHERE id_user='$user_id'";	
+	}
+	$res = mysqli_query($link, $sql_inverts);
+	return $res; 
+}
