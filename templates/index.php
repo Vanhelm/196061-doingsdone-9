@@ -27,12 +27,12 @@
     <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === "1") : ?>task--completed <?php endif;?>"> 
     <td class="task__select"> 
         <label class="checkbox task__checkbox"> 
-            <input class="checkbox__input visually-hidden" type="checkbox" name="checked" value="<?$value['task_id']?>"q <?php if($value["status"] === "1") : ?> checked <?php endif;?>> 
+            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" name="checked" value="<?=$value['id_task']?>" <?php if($value["status"] === "1") : ?> checked <?php endif;?>> 
             <span class="checkbox__text"> <?=htmlspecialchars($value["name"]); ?></span> 
         </label> 
     </td> 
     <td class="task__file">
-        <a class="download-link" href="<?=$value['file']?>">Home.psd</a>
+        <a class="download-link" href="<?=$value['file']?>"><?=$value['file'] ?? ""?> </a>
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 
