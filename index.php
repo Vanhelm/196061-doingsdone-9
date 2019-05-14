@@ -2,9 +2,29 @@
 require_once('system/init.php');
 if(!empty($user))
 {
-	$show_complete_tasks = rand(0, 1);	
+	$show_complete_tasks = 1;	
 	$content_page;
 	$tasks = [];
+
+	if(isset($_GET['task_id']))
+		{
+			$task_id = intval($_GET['task_id']);
+			$sql = "SELECT * FROM tasks WHERE id_task = '$task_id' AND id_user = '$user_id'";
+			$res = mysqli_query($link, $sql);
+			$task_complete = mysqli_fetch_assoc($res);
+
+			if($task_complete['status'] == 0)
+			{
+				$status = 1;
+			}
+			else
+			{
+				$status = 0;
+			}
+
+			$sql_update = "UPDATE tasks SET status = '$status' WHERE id_task = '$task_id' AND id_user = '$user_id'";
+			$result = mysqli_query($link, $sql_update);
+		}
 
 	if(isset($_GET['id']))
 	{
