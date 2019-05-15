@@ -54,7 +54,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		
 		if($result)
 		{
-			$_SESSION['user_id'] = intval(mysqli_insert_id($link));
 			header("Location: /");
 			exit();
 		}

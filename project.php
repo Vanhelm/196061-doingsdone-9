@@ -25,6 +25,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{
 		$errors = "Cлишком длинное имя проекта, максимум 60 символов";
 	}
+	if(empty($errors))
+	{
+		$sql_name_project = "SELECT name FROM projects WHERE id_user='$user_id' AND name='$data'";
+		$result = mysqli_query($link, $sql_name_project);
+		$name_project = mysqli_fetch_assoc($result);
+		if(!empty($name_project))
+		{
+			$errors = "У Вас уже есть проект с таким именем";
+		}
+	}
 
 	if(empty($errors))
 	{

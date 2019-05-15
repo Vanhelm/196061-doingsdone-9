@@ -8,10 +8,10 @@
 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
-                        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-                        <a href="/" class="tasks-switch__item">Повестка дня</a>
-                        <a href="/" class="tasks-switch__item">Завтра</a>
-                        <a href="/" class="tasks-switch__item">Просроченные</a>
+                        <a href="/" class="tasks-switch__item <?php if($date_select == "") : ?>tasks-switch__item--active<?php endif ?>">Все задачи</a>
+                        <a href="/index.php/?<?=http_build_query(['date' => "today"])?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
+                        <a href="/index.php/?<?=http_build_query(['date' => "tomorrow"])?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
+                        <a href="/index.php/?<?=http_build_query(['date' => "overdue"])?>" class="tasks-switch__item <?php if($date_select == "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
                     </nav>
 
                     <label class="checkbox">
@@ -23,7 +23,7 @@
 
 <table class="tasks"> 
 <? foreach ($tasks as $key => $value) : ?> 
-<? if ($show_complete_tasks === 1 or $value["status"] !== "1") : ?> 
+<? if ($show_complete_tasks == 1 or $value["status"] !== "1") : ?> 
     <tr class="tasks__item task <?php if(calculationDate($value["term"], $value["status"]) === true) : ?> task--important <?php endif?> <?php if($value["status"] === "1") : ?>task--completed <?php endif;?>"> 
     <td class="task__select"> 
         <label class="checkbox task__checkbox"> 
@@ -32,7 +32,7 @@
         </label> 
     </td> 
     <td class="task__file">
-        <a class="download-link" href="<?=$value['file']?>"><?=$value['file'] ?? ""?> </a>
+        <?php if(!empty($value['file'])) : ?><a class="download-link" href="<?=$value['file']?>"><?=$value['file']?> </a><?php endif?>
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 

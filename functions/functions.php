@@ -17,7 +17,7 @@ function calculationDate($data, $taskComplete){
 	} 
 
 	$currentData = time(); 
-	$formatDate = strtotime($data); 
+	$formatDate = strtotime("$data"); 
 	$dateOfComplete = $formatDate - $currentData; 
 	
 	if($dateOfComplete <= 86400)
@@ -77,5 +77,43 @@ function get_task($link, $project_id, $user_id, $show_complete_task)
 
 	$res_task = mysqli_query($link, $sql);
 	$tasks = mysqli_fetch_all($res_task, MYSQLI_ASSOC);
+	return $tasks;
+}
+
+/**
+* Фильтр задач
+* 
+* Функция позволяет получить массив с задачами
+* по заданным условиям. Работая с датой
+* 
+* @param string значение из GET параметра
+* @param int $user_id id пользователя
+* @param string $link подключение к БД
+* @return array
+*/
+function filter_tasks($date_select, $user_id, $link)
+{
+	$sql_date = "SELECT * FROM tasks WHERE id_user='$user_id'";
+	if($date_select == "today")
+	{
+		$sql_date .= " AND term = CURDATE()";		
+	}
+
+	elseif($date_select == "tomorrow")
+	{
+		$sql_date .= " AND term = (CURDATE()+1)";
+	}
+
+	elseif($date_select == "overdue")
+	{
+		$sql_date .= " AND term < CURDATE()-1";	
+	}
+	else
+	{
+		return "error";
+	}
+
+	$res_date = mysqli_query($link, $sql_date);
+	$tasks = mysqli_fetch_all($res_date, MYSQLI_ASSOC);
 	return $tasks;
 }
