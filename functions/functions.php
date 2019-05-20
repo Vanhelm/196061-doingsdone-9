@@ -17,7 +17,8 @@ function calculationDate($data, $taskComplete){
 	} 
 
 	$currentData = time(); 
-	$formatDate = strtotime("$data");
+	$formatDate = strtotime("$data"); 
+
 	$dateOfComplete = $formatDate - $currentData; 
 	
 	if($dateOfComplete <= 86400)
@@ -140,3 +141,4 @@ function error_404($projects, $title, $user)
 	print_r($layout_content);
 	exit();
 }
+

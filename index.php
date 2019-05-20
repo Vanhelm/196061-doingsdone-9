@@ -2,10 +2,12 @@
 require_once('system/init.php');
 if(!empty($user))
 {	
+
 	$tasks = [];
 	$show_complete_tasks = 0;
 	$date_select = "";
 	$search = "";	
+
 
 	if(isset($_COOKIE["show"]))
 	{
@@ -97,6 +99,25 @@ if(!empty($user))
 		}
 	}
 
+	if(isset($_GET['date']))
+	{
+		$date_select = $_GET['date'];
+		if(filter_tasks($date_select, $user_id, $link) == "error")
+		{
+			http_response_code(404);
+			$content = include_template('error404.php');				
+		}
+		else
+		{	
+			$tasks = filter_tasks($date_select, $user_id, $link);
+			$content = include_template('index.php', [
+				'tasks' => $tasks, 
+				'show_complete_tasks' => $show_complete_tasks, 
+				'date_select' => $date_select
+			]);
+		}
+
+	}
 	$layout_content = include_template('layout.php',[
     	'projects' => $projects,
     	'tasks' => $tasks,
@@ -111,5 +132,6 @@ else
 {
 	$layout_content = include_template('guest.php', ['title' => $title]);
 }
+
 print ($layout_content);
 ?>

@@ -104,7 +104,6 @@ $layout_content = include_template('layout.php',[
     'projects' => $projects,
     'content' => $content,
   	'title' => "Добавить задачу",
-  
  	'active' => $active_project_id,
   	'name_user' => $user['name']
 ]);
