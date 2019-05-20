@@ -95,7 +95,6 @@ if(!empty($user))
 				'active' => $active_project_id
 			]);			
 		}
-
 	}
 
 	$layout_content = include_template('layout.php',[

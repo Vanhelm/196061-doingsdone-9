@@ -8,6 +8,7 @@
 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
+
                         <a href="/" class="tasks-switch__item <?php if($date_select == "") : ?>tasks-switch__item--active<?php endif ?>">Все задачи</a>
                         <a href="/index.php/?date=today<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
                         <a href="/index.php/?date=tomorrow<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
@@ -33,6 +34,7 @@
     </td> 
     <td class="task__file">
         <?php if(!empty($value['file'])) : ?><a class="download-link" href="<?=$value['file']?>"><?=$value['file']?> </a><?php endif?>
+
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 

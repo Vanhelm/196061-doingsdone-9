@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{	
 		$errors['email'] = "E-mail в базе не найден";
 	}
-
+  
 	if(empty($errors))
 	{
 		if(!password_verify($data['password'], $verify['password']))

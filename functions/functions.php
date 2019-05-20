@@ -17,7 +17,7 @@ function calculationDate($data, $taskComplete){
 	} 
 
 	$currentData = time(); 
-	$formatDate = strtotime("$data"); 
+	$formatDate = strtotime("$data");
 	$dateOfComplete = $formatDate - $currentData; 
 	
 	if($dateOfComplete <= 86400)

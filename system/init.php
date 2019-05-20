@@ -15,6 +15,7 @@ $name_user = "";
 $title = "Дела в порядке";
 $active_project_id = null;
 
+
 $link = mysqli_connect("localhost", "root", "", "affairs_order");
 
 if(!$link)
