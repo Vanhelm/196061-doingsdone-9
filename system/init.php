@@ -13,7 +13,7 @@ $user = [];
 $user_id = 0;
 $name_user = "";
 $title = "Дела в порядке";
-$active_project_id = 0;
+$active_project_id = null;
 
 $link = mysqli_connect("localhost", "root", "", "affairs_order");
 

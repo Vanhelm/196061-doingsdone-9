@@ -8,10 +8,10 @@
 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
-                        <a href="/index.php/?date=all" class="tasks-switch__item <?php if($date_select == "") : ?>tasks-switch__item--active<?php endif ?>">Все задачи</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "today"])?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "tomorrow"])?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "overdue"])?>" class="tasks-switch__item <?php if($date_select == "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
+                        <a href="/" class="tasks-switch__item <?php if($date_select == "") : ?>tasks-switch__item--active<?php endif ?>">Все задачи</a>
+                        <a href="/index.php/?date=today<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
+                        <a href="/index.php/?date=tomorrow<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
+                        <a href="/index.php/?date=overdue<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
                     </nav>
 
                     <label class="checkbox">

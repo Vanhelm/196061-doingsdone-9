@@ -40,7 +40,7 @@
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $key => $val) : ?>
                          <li class="main-navigation__list-item <?php if($active == $val['project_id']) : ?> main-navigation__list-item--active<?php endif ?>">
-                             <a class="main-navigation__list-item-link" href="/index.php/?<?=http_build_query(['id' => $val['project_id'], 'date' => $date_select])?>"><?=htmlspecialchars($val['project_name']);?></a>
+                             <a class="main-navigation__list-item-link" href="/index.php/?id=<?=$val['project_id']?><?=($date_select) ? '&date='.$date_select : ""?>"><?=htmlspecialchars($val['project_name']);?></a>
                             <span class="main-navigation__list-item-count "><?=$val['count_item'];?></span>
                         </li>
                         <?php endforeach; ?>
