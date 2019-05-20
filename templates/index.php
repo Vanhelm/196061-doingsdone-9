@@ -1,17 +1,18 @@
  <h2 class="content__main-heading">Список задач</h2>
 
-                <form class="search-form" action="index.php" method="post" autocomplete="off">
-                    <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
+                <form class="search-form" action="/index.php" method="get" autocomplete="off">
+                    <input class="search-form__input" type="text" name="search" value="" placeholder="Поиск по задачам">
 
                     <input class="search-form__submit" type="submit" name="" value="Искать">
                 </form>
 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
+
                         <a href="/" class="tasks-switch__item <?php if($date_select == "") : ?>tasks-switch__item--active<?php endif ?>">Все задачи</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "today"])?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "tomorrow"])?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
-                        <a href="/index.php/?<?=http_build_query(['date' => "overdue"])?>" class="tasks-switch__item <?php if($date_select == "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
+                        <a href="/index.php/?date=today<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка дня</a>
+                        <a href="/index.php/?date=tomorrow<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
+                        <a href="/index.php/?date=overdue<?=($active) ? '&id=' . $active : '';?>" class="tasks-switch__item <?php if($date_select == "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
                     </nav>
 
                     <label class="checkbox">
@@ -33,6 +34,7 @@
     </td> 
     <td class="task__file">
         <?php if(!empty($value['file'])) : ?><a class="download-link" href="<?=$value['file']?>"><?=$value['file']?> </a><?php endif?>
+
     </td>
     <td class="task__date"><?=correct_visual_date($value['term']); ?></td> 
     <td class="task__controls"></td> 

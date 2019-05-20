@@ -98,6 +98,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 	}
 }
+
 $content = include_template('form-task.php', ['projects' => $projects, 'errors' => $errors, 'data' => $data, 'id' => $id]);
 $layout_content = include_template('layout.php',[
     'projects' => $projects,

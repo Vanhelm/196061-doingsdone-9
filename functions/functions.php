@@ -18,6 +18,7 @@ function calculationDate($data, $taskComplete){
 
 	$currentData = time(); 
 	$formatDate = strtotime("$data"); 
+
 	$dateOfComplete = $formatDate - $currentData; 
 	
 	if($dateOfComplete <= 86400)
@@ -91,29 +92,53 @@ function get_task($link, $project_id, $user_id, $show_complete_task)
 * @param string $link подключение к БД
 * @return array
 */
-function filter_tasks($date_select, $user_id, $link)
+function filter_tasks($date_select, $user_id, $link, $active_project)
 {
-	$sql_date = "SELECT * FROM tasks WHERE id_user='$user_id'";
+	
+	$sql = "SELECT * FROM tasks WHERE id_user='$user_id' AND status=0 ";
+	
 	if($date_select == "today")
 	{
-		$sql_date .= " AND term = CURDATE()";		
+		$sql .= " AND term = CURDATE()";		
 	}
-
 	elseif($date_select == "tomorrow")
 	{
-		$sql_date .= " AND term = (CURDATE()+1)";
+		$sql .= " AND term = (CURDATE()+1)";
 	}
-
 	elseif($date_select == "overdue")
 	{
-		$sql_date .= " AND term < CURDATE()-1";	
+		$sql .= " AND term <= (CURDATE()-1)";	
+	}
+	elseif($date_select == null)
+	{
+		$sql .= "";
 	}
 	else
 	{
 		return "error";
 	}
 
-	$res_date = mysqli_query($link, $sql_date);
-	$tasks = mysqli_fetch_all($res_date, MYSQLI_ASSOC);
+	if($active_project)
+	{
+		$sql .= " AND project_id= '$active_project'";		
+	}
+
+	$res = mysqli_query($link, $sql);
+	$tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
 	return $tasks;
 }
+
+function error_404($projects, $title, $user)
+{
+	http_response_code(404);
+	$content = include_template('error404.php');
+	$layout_content = include_template('layout.php',[
+    	'projects' => $projects,
+    	'content' => $content,
+    	'title' => $title,
+    	'name_user' => $user['name'],
+	]);
+	print_r($layout_content);
+	exit();
+}
+
