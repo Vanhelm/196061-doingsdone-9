@@ -42,12 +42,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{	
 		$errors['email'] = "E-mail в базе не найден";
 	}
-	//Проверяем на ошибки, если email такого нет, то хэши мы сравнивать не будем 
-	//соотвтестно и обращаться к несуществующей переменной тоже не будем
-	if(empty($errors['email']))
+  
+	if(empty($errors))
 	{
-		//А если вот пароль неверен мы выдадим что к такому email пароль неверен
-		if(empty($errors['password']) AND !password_verify($data['password'], $verify['password']))
+		if(!password_verify($data['password'], $verify['password']))
 		{
 			$errors['password'] = "Пароль не подходит к данному email";
 		}

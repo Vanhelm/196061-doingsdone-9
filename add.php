@@ -8,7 +8,7 @@ if(empty($user))
 }
 
 $keys = ['name', 'project'];
-$currentDate = strtotime('today');
+$currentDate = time() - 86400;
 $errors = [];
 $data = [];
 $id = 0;
@@ -31,7 +31,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	if(empty($errors['name']) AND strlen($data['name']) > 60)
 	{
 		$errors['name'] = "Cлишком длинное имя задачи, максимум 60 символов";
-		$data['name'] = ""; 
 	}
 	if(empty($errors['project']))
 	{
@@ -48,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	{
 		if(!is_date_valid($_POST['date']))
 		{
-				$errors['date'] = "Неверный формат даты";
+			$errors['date'] = "Неверный формат даты";
 		}
 		elseif(strtotime($_POST['date']) <= $currentDate)
 		{
@@ -99,11 +98,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		}
 	}
 }
-$content = include_template('form-task.php', ['projects' => $projects, 'title' => "Добавить задачу", 'errors' => $errors, 'data' => $data, 'id' => $id]);
+
+$content = include_template('form-task.php', ['projects' => $projects, 'errors' => $errors, 'data' => $data, 'id' => $id]);
 $layout_content = include_template('layout.php',[
     'projects' => $projects,
     'content' => $content,
-  	'title' => $title,
+  	'title' => "Добавить задачу",
+  
  	'active' => $active_project_id,
   	'name_user' => $user['name']
 ]);
