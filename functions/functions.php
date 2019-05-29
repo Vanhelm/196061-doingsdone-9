@@ -137,18 +137,3 @@ function error_404($projects, $title, $user)
     print_r($layout_content);
     exit();
 }
-
-function error_404($projects, $title, $user)
-{
-	http_response_code(404);
-	$content = include_template('error404.php');
-	$layout_content = include_template('layout.php',[
-    	'projects' => $projects,
-    	'content' => $content,
-    	'title' => $title,
-    	'name_user' => $user['name'],
-	]);
-	print_r($layout_content);
-	exit();
-}
-
