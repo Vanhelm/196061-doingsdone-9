@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+
 //Подключаем шаблоны
 $content = include_template('form-task.php',
     ['projects' => $projects, 'errors' => $errors, 'data' => $data, 'id' => $id]);
