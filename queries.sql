@@ -35,6 +35,6 @@ UPDATE tasks SET status = 1
 WHERE status=0 AND id_task=1;  
 
 UPDATE tasks SET name='Зачем-то обновил название'
-
 WHERE id_task=1;
+
 

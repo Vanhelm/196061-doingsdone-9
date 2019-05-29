@@ -38,3 +38,4 @@ CREATE TABLE tasks
 CREATE FULLTEXT INDEX search
 ON projects(name);
 
+
