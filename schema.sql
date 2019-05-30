@@ -29,7 +29,7 @@ CREATE TABLE tasks
 	status TINYINT DEFAULT 0,
 	name VARCHAR(68) NOT NULL,
 	file VARCHAR(100),
-	term TIMESTAMP(20),
+	term TIMESTAMP,
 	project_id INT,
 	id_user INT,
 	FOREIGN KEY (id_user) REFERENCES users(id_user),
