@@ -95,9 +95,9 @@ function filter_tasks($date_select, $user_id, $link, $active_project)
     if ($date_select === "today") {
         $sql .= " AND term = CURDATE()";
     } elseif ($date_select === "tomorrow") {
-        $sql .= " AND term = (CURDATE()+1)";
+        $sql .= " AND term = CURDATE() + INTERVAL 1 DAY";
     } elseif ($date_select === "overdue") {
-        $sql .= " AND term <= (CURDATE()-1)";
+        $sql .= " AND term < CURDATE()";
     } elseif ($date_select === null) {
         $sql .= "";
     } else {

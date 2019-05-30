@@ -11,12 +11,12 @@
         <a href="/"
            class="tasks-switch__item <?php if ($date_select === null) : ?>tasks-switch__item--active<?php endif ?>">Все
             задачи</a>
-        <a href="/index.php/?date=today<?= ($active) ? '&id=' . $active : ''; ?>"
+        <a href="/index.php?date=today<?= ($active) ? '&id=' . $active : ''; ?>"
            class="tasks-switch__item <?php if ($date_select === "today") : ?>tasks-switch__item--active<?php endif ?>">Повестка
             дня</a>
-        <a href="/index.php/?date=tomorrow<?= ($active) ? '&id=' . $active : ''; ?>"
+        <a href="/index.php?date=tomorrow<?= ($active) ? '&id=' . $active : ''; ?>"
            class="tasks-switch__item <?php if ($date_select === "tomorrow") : ?>tasks-switch__item--active<?php endif ?>">Завтра</a>
-        <a href="/index.php/?date=overdue<?= ($active) ? '&id=' . $active : ''; ?>"
+        <a href="/index.php?date=overdue<?= ($active) ? '&id=' . $active : ''; ?>"
            class="tasks-switch__item <?php if ($date_select === "overdue") : ?>tasks-switch__item--active<?php endif ?>">Просроченные</a>
     </nav>
 
